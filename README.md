@@ -30,7 +30,7 @@ This is an End-to-End Machine Learning Project which focuses on phishing website
 
 ## important notes
 - features are content-based and need BeautifulSoup module's methods and fields etc So, you should install it.
-- this code is an output of a video series on the YouTube --> https://www.youtube.com/watch?v=-Aldptec9Xs&list=PL8Uzrd8g1md8kdvNJy0BNRc3cJfVP8QEf
+
 
 
 ## dataset
