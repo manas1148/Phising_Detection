@@ -1,39 +1,100 @@
-# phishing-website-detection-content-based
-This is an End-to-End Machine Learning Project which focuses on phishing websites to classify phishing and legitimate ones. Particularly, I focused on content-based features like html tag based features. You can find feature extraction, data collection, preparation process here. Also, building ML models, evaluating them are available here.
+# Phishing Website Detection (Content-Based)
 
+![Project Banner](screenshots/banner.png) <!-- Replace with your actual banner image -->
 
-## inputs
-- csv files of phishing and legitimate URLs
-  - verified_online.csv --> phishing websites URLs from phishtank.org
-  - tranco_list.csv --> legitimate websites URLs from tranco-list.eu
-  
-## general flow
-- Use csv file to get URLs
-- Send a request to each URL and receive a response by requests library of python
-- Use the content of response and parse it by BeautifulSoup module
-- Extract features and create a vector which contains numerical values for each feature
-- Repeat feature extraction process for all content\websites and create a structured dataframe
-- Add label at the end to the dataframes | 1 for phishing 0 for legitimate
-- Save the dataframe as csv and structured_data files are ready!
-  - Check "structured_data_legitimate.csv" and "structured_data_phishing.csv" files. 
-- After obtaining structured data, you can use combine them and use them as train and test data
-- You can split data as train and test like in the machine_learning.py first part, or you can implement K-fold cross-validation like in the second part of the same file. I implemented K-fold as K=5.
-- Then I implemented five different ML models:
-  - Support Vector Machine
+## Overview
+This project is an end-to-end machine learning application that detects phishing websites using content-based features extracted from HTML. The app is built with Streamlit for an interactive web interface and uses several machine learning models to classify websites as phishing or legitimate.
+
+## Features
+- Extracts content-based features from website HTML using BeautifulSoup
+- Supports multiple machine learning models:
+  - Support Vector Machine (SVM)
   - Gaussian Naive Bayes
   - Decision Tree
   - Random Forest
   - AdaBoost
-- You can obtain the confusion matrix, and performance measures: accuracy, precision, recall
-- Finally, I visualized the performance measures for all models.
-  - Naive Bayes is the best for my case.
+- Visualizes model performance (accuracy, precision, recall, confusion matrix)
+- Interactive web app for predictions and data exploration
 
-## important notes
-- features are content-based and need BeautifulSoup module's methods and fields etc So, you should install it.
-- this code is an output of a video series on the YouTube --> https://www.youtube.com/watch?v=-Aldptec9Xs&list=PL8Uzrd8g1md8kdvNJy0BNRc3cJfVP8QEf
+## Demo
+![App Screenshot](screenshots/app_demo.png) <!-- Replace with your actual screenshot -->
 
+## Project Structure
+```
+app.py                      # Streamlit web app
+machine_learning.py         # ML model training and evaluation
+feature_extraction.py       # Feature extraction logic
+features.py                 # Feature definitions
+requirements.txt            # Python dependencies
+structured_data_legitimate.csv  # Legitimate websites data
+structured_data_phishing.csv    # Phishing websites data
+tranco_list.csv                 # Source URLs (legitimate)
+verified_online.csv             # Source URLs (phishing)
+data_collector.py           # Script to collect and structure data
+```
 
-## dataset
-- with your URL list, you can create your own dataset by using data_collector python file.
+## Dataset
+- **Phishing URLs:** `verified_online.csv` (from phishtank.org)
+- **Legitimate URLs:** `tranco_list.csv` (from tranco-list.eu)
+- **Structured Data:**
+  - `structured_data_legitimate.csv`
+  - `structured_data_phishing.csv`
+
+## How It Works
+1. **Data Collection:**
+   - URLs are collected from CSV files.
+   - Each URL is fetched using the `requests` library.
+   - HTML content is parsed with BeautifulSoup.
+2. **Feature Extraction:**
+   - Content-based features are extracted and converted into numerical vectors.
+   - Data is labeled (1 for phishing, 0 for legitimate).
+3. **Model Training:**
+   - Data is split into training and test sets (or K-fold cross-validation).
+   - Five ML models are trained and evaluated.
+4. **Evaluation:**
+   - Confusion matrix and performance metrics are computed and visualized.
+
+## Setup Instructions
+1. **Clone the repository:**
+   ```sh
+   git clone <your-repo-url>
+   cd Phising_Detection-main
+   ```
+2. **(Recommended) Create a Python 3.11 environment:**
+   ```sh
+   conda create -n phishing python=3.11
+   conda activate phishing
+   ```
+3. **Install dependencies:**
+   ```sh
+   pip install -r requirements.txt
+   ```
+4. **Run the Streamlit app:**
+   ```sh
+   streamlit run app.py
+   ```
+
+## Results
+- The app displays model performance for each algorithm.
+- Example performance visualization:
+
+![Performance Screenshot](screenshots/performance.png) <!-- Replace with your actual screenshot -->
+
+- In this project, Naive Bayes performed best on the dataset.
+
+## References
+- [PhishTank](https://phishtank.org/)
+- [Tranco List](https://tranco-list.eu/)
+- [BeautifulSoup Documentation](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+- [Streamlit Documentation](https://docs.streamlit.io/)
+
+## Notes
+- This project is for educational purposes only.
+- For more details, see the code and comments in each file.
+- Based on a YouTube video series: [Watch here](https://www.youtube.com/watch?v=-Aldptec9Xs&list=PL8Uzrd8g1md8kdvNJy0BNRc3cJfVP8QEf)
+
+---
+
+> **Tip:** Replace the screenshot placeholders with your actual images (place them in a `screenshots/` folder in your project directory).
 
 
